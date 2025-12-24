@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduGreenTech — Инновационные EdTech решения</title>
+  <meta name="description" content="Платформа для корпоративного обучения с фокусом на устойчивое развитие.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/components.css">
+  <style>
+    /* Анимация для Hero-секции */
+    @keyframes pulse-gradient {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 0.2;
+      }
+      50% {
+        transform: scale(1.1);
+        opacity: 0.3;
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-20px) rotate(5deg);
+      }
+    }
+
+    @keyframes blob-animation {
+      0% {
+        border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
+      }
+      50% {
+        border-radius: 30% 60% 70% 40%/50% 60% 30% 60%;
+      }
+      100% {
+        border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
+      }
+    }
+
+    /* Анимированный градиентный blob */
+    .hero-blob {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: var(--gradient-hero);
+      border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
+      filter: blur(60px);
+      opacity: 0.2;
+      animation: 
+        blob-animation 8s ease-in-out infinite,
+        pulse-gradient 4s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    /* Анимированные элементы в Hero */
+    .hero-animation {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 400px;
+    }
+
+    .floating-shape {
+      position: relative;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .floating-shape .shape-1 {
+      width: 120px;
+      height: 120px;
+      background: var(--gradient-hero);
+      border-radius: 30% 70% 70% 30%/30% 30% 70% 70%;
+      animation: blob-animation 10s ease-in-out infinite;
+    }
+
+    .floating-shape .shape-2 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px;
+      height: 80px;
+      background: var(--gradient-cta);
+      border-radius: 50%;
+      opacity: 0.8;
+    }
+
+    .floating-shape .shape-3 {
+      position: absolute;
+      top: 20%;
+      right: 10%;
+      width: 40px;
+      height: 40px;
+      background: var(--secondary);
+      border-radius: 50%;
+      opacity: 0.6;
+      animation: float 4s ease-in-out infinite 1s;
+    }
+
+    .pulse-dot {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: var(--secondary);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 0.8;
+      }
+      50% {
+        transform: scale(1.5);
+        opacity: 0.4;
+      }
+    }
+
+    /* Анимация для кнопок */
+    @keyframes pulse-button {
+      0%, 100% {
+        box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
+      }
+      50% {
+        box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4), 0 0 30px rgba(37, 99, 235, 0.2);
+      }
+    }
+
+    .btn-primary {
+      animation: pulse-button 3s ease-in-out infinite;
+    }
+
+    /* Анимация для карточек при скролле */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Анимация для статистики */
+    @keyframes count-up {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .stat-number {
+      animation: count-up 1s ease-out;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .hero-blob {
+        width: 300px;
+        height: 300px;
+        top: 50px;
+        right: -100px;
+      }
+      
+      .floating-shape .shape-1 {
+        width: 100px;
+        height: 100px;
+      }
+      
+      .floating-shape .shape-2 {
+        width: 60px;
+        height: 60px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-blob {
+        width: 200px;
+        height: 200px;
+        top: 100px;
+        right: -50px;
+      }
+      
+      .floating-shape .shape-1 {
+        width: 80px;
+        height: 80px;
+      }
+      
+      .floating-shape .shape-2 {
+        width: 50px;
+        height: 50px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar">
+  <div class="container">
+    <div class="nav-content">
+      <div class="logo">EduGreen<span class="logo-accent">Tech</span></div>
+      <ul class="nav-menu">
+        <li><a href="#solutions">Решения</a></li>
+        <li><a href="#how-it-works">Как работает</a></li>
+        <li><a href="#testimonials">Кейсы</a></li>
+        <li><a href="#contact" class="btn btn-secondary">Связаться</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div>
+        <h1 class="hero-title">Образование будущего уже сегодня</h1>
+        <p class="hero-subtitle">Инновационная платформа, объединяющая EdTech и GreenTech для создания устойчивых образовательных решений.</p>
+        <div style="display:flex; gap:16px; margin-bottom:32px;">
+          <a href="#contact" class="btn btn-primary btn-large">Запросить демо</a>
+          <a href="#solutions" class="btn btn-secondary">Подробнее</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="stat-number" data-count="500">500+</div>
+            <div class="stat-label">Компаний</div>
+          </div>
+          <div>
+            <div class="stat-number" data-count="50000">50K+</div>
+            <div class="stat-label">Учеников</div>
+          </div>
+          <div>
+            <div class="stat-number" data-count="95">95%</div>
+            <div class="stat-label">Удовлетворенность</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-animation">
+        <!-- Анимированный градиентный фон -->
+        <div class="hero-blob" style="top: 100px; right: 100px;"></div>
+        <div class="hero-blob" style="top: 200px; left: 50px; background: var(--gradient-cta); animation-delay: 2s;"></div>
+        
+        <!-- Анимированные формы -->
+        <div class="floating-shape">
+          <div class="shape-1"></div>
+          <div class="shape-2"></div>
+          <div class="shape-3"></div>
+          
+          <!-- Анимированные точки -->
+          <div class="pulse-dot" style="top: 10%; left: 20%; animation-delay: 0s;"></div>
+          <div class="pulse-dot" style="bottom: 20%; right: 10%; background: var(--accent); animation-delay: 0.5s;"></div>
+          <div class="pulse-dot" style="top: 40%; right: 30%; background: var(--secondary); animation-delay: 1s;"></div>
+          <div class="pulse-dot" style="bottom: 40%; left: 20%; animation-delay: 1.5s;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Остальной код остается без изменений... -->
+<!-- Solutions -->
+<section id="solutions" class="solutions">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Наши решения</h2>
+      <p class="section-subtitle">Инновационные инструменты для цифровой трансформации обучения</p>
+    </div>
+    <div class="solutions-grid">
+      <div class="solution-card fade-in">
+        <div class="card-icon">📊</div>
+        <h3 class="card-title">AI-персонализация</h3>
+        <p class="card-text">Индивидуальные траектории обучения на основе анализа поведения и компетенций.</p>
+      </div>
+      <div class="solution-card fade-in">
+        <div class="card-icon">🌱</div>
+        <h3 class="card-title">Экологическое обучение</h3>
+        <p class="card-text">Модули по устойчивому развитию и экологической ответственности.</p>
+      </div>
+      <div class="solution-card fade-in">
+        <div class="card-icon">⚡</div>
+        <h3 class="card-title">Быстрая интеграция</h3>
+        <p class="card-text">Подключение за 1–2 недели. Совместимость с LMS, HRIS и SSO.</p>
+      </div>
+      <div class="solution-card fade-in">
+        <div class="card-icon">📈</div>
+        <h3 class="card-title">Аналитика ROI</h3>
+        <p class="card-text">Измеримые метрики эффективности обучения для отчётности инвесторам.</p>
+      </div>
+      <div class="solution-card fade-in">
+        <div class="card-icon">🔄</div>
+        <h3 class="card-title">Облачная платформа</h3>
+        <p class="card-text">Масштабируемость от 10 до 100 000 пользователей. 99.95% uptime.</p>
+      </div>
+      <div class="solution-card fade-in">
+        <div class="card-icon">🔒</div>
+        <h3 class="card-title">Безопасность данных</h3>
+        <p class="card-text">Соответствие стандартам GDPR, ISO 27001 и корпоративной безопасности.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section id="how-it-works" class="how-it-works">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Как это работает</h2>
+      <p class="section-subtitle">Простой путь к цифровому обучению</p>
+    </div>
+    <div class="steps">
+      <div class="step fade-in">
+        <div class="step-number">01</div>
+        <h3 class="step-title">Анализ</h3>
+        <p class="step-text">Оцениваем текущие компетенции и цели вашей команды.</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step-number">02</div>
+        <h3 class="step-title">Настройка</h3>
+        <p class="step-text">Интегрируем платформу и адаптируем контент под вашу отрасль.</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step-number">03</div>
+        <h3 class="step-title">Запуск и рост</h3>
+        <p class="step-text">Обучаем, измеряем, оптимизируем — вы получаете ROI.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials / Cases -->
+<section id="testimonials" class="testimonials">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Результаты клиентов</h2>
+      <p class="section-subtitle">Что получили наши клиенты</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card fade-in">
+        <p class="card-text">"Сокращение onboarding на 40%. Обучение новых сотрудников за 5 дней вместо 2 недель."</p>
+        <div style="margin-top:24px; padding-top:24px; border-top:1px solid #E2E8F0; display:flex; gap:12px;">
+          <div style="width:48px; height:48px; border-radius:50%; background:#2563EB; display:flex; align-items:center; justify-content:center; color:white; font-weight:bold;">NT</div>
+          <div>
+            <div style="font-weight:600;">NeuroTech</div>
+            <div style="font-size:14px; color:#64748B;">AI-стартап</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-in">
+        <p class="card-text">"ROI 220% за 6 месяцев. Повышение цифровой грамотности сотрудников."</p>
+        <div style="margin-top:24px; padding-top:24px; border-top:1px solid #E2E8F0; display:flex; gap:12px;">
+          <div style="width:48px; height:48px; border-radius:50%; background:#10B981; display:flex; align-items:center; justify-content:center; color:white; font-weight:bold;">GB</div>
+          <div>
+            <div style="font-weight:600;">GlobalBank</div>
+            <div style="font-size:14px; color:#64748B;">Финансы</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-in">
+        <p class="card-text">"Масштаб до 8K пользователей. Стабильная работа без простоев в пиковые нагрузки."</p>
+        <div style="margin-top:24px; padding-top:24px; border-top:1px solid #E2E8F0; display:flex; gap:12px;">
+          <div style="width:48px; height:48px; border-radius:50%; background:#8B5CF6; display:flex; align-items:center; justify-content:center; color:white; font-weight:bold;">EL</div>
+          <div>
+            <div style="font-weight:600;">EduLab</div>
+            <div style="font-size:14px; color:#64748B;">Образование</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="contact">
+  <div class="container">
+    <div class="contact-content">
+      <div>
+        <h2 class="contact-title">Готовы начать?</h2>
+        <p class="card-text">Оставьте заявку — получите демо-доступ и персонализированное предложение.</p>
+        <ul style="margin-top:24px; list-style:none; padding:0;">
+          <li style="display:flex; gap:10px; margin-bottom:12px;">✓ Бесплатная консультация</li>
+          <li style="display:flex; gap:10px; margin-bottom:12px;">✓ Демо на 14 дней</li>
+          <li style="display:flex; gap:10px;">✓ Гарантия возврата</li>
+        </ul>
+      </div>
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="name">Имя</label>
+          <input type="text" id="name" required>
+        </div>
+        <div class="form-group">
+          <label for="company">Компания</label>
+          <input type="text" id="company" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Сообщение</label>
+          <textarea id="message"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full btn-large">Отправить</button>
+        <p class="form-note">Нажимая, вы соглашаетесь с политикой конфиденциальности</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div>
+        <div class="logo">EduGreen<span class="logo-accent">Tech</span></div>
+        <p style="font-size:16px; color:#94A3B8; margin-top:12px;">Платформа для устойчивого обучения будущего.</p>
+      </div>
+      <div style="display:grid; grid-template-columns: repeat(3,1fr); gap:32px;">
+        <div class="footer-column">
+          <h4>Продукт</h4>
+          <ul>
+            <li><a href="#solutions">Решения</a></li>
+            <li><a href="#how-it-works">Как работает</a></li>
+            <li><a href="#testimonials">Кейсы</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Компания</h4>
+          <ul>
+            <li><a href="#contact">Контакты</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Поддержка</h4>
+          <ul>
+            <li><a href="#contact">Техподдержка</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 EduGreenTech. Все права защищены.
+    </div>
+  </div>
+</footer>
+
+<script>
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    document.querySelector(link.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+// Form
+document.getElementById('contactForm').addEventListener('submit', e => {
+  e.preventDefault();
+  alert('Спасибо! Наш менеджер свяжется с вами в течение 24 часов.');
+  e.target.reset();
+});
+
+// Анимация появления элементов при скролле
+function checkFadeIn() {
+  const fadeElements = document.querySelectorAll('.fade-in');
+  fadeElements.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 100) {
+      el.classList.add('visible');
+    }
+  });
+}
+
+// Анимация счетчиков
+function animateCounter(element) {
+  const target = parseInt(element.getAttribute('data-count'));
+  const suffix = element.textContent.includes('+') ? '+' : '';
+  const suffix2 = element.textContent.includes('K') ? 'K' : '';
+  const suffix3 = element.textContent.includes('%') ? '%' : '';
+  
+  let current = 0;
+  const increment = target / 50;
+  const timer = setInterval(() => {
+    current += increment;
+    if (current >= target) {
+      current = target;
+      clearInterval(timer);
+    }
+    if (suffix) {
+      element.textContent = Math.floor(current) + suffix;
+    } else if (suffix2) {
+      element.textContent = Math.floor(current/1000) + suffix2 + '+';
+    } else if (suffix3) {
+      element.textContent = Math.floor(current) + suffix3;
+    } else {
+      element.textContent = Math.floor(current);
+    }
+  }, 30);
+}
+
+// Запуск анимации счетчиков при появлении в области видимости
+function checkCounters() {
+  const counters = document.querySelectorAll('.stat-number');
+  counters.forEach(counter => {
+    const rect = counter.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 100 && !counter.classList.contains('animated')) {
+      counter.classList.add('animated');
+      animateCounter(counter);
+    }
+  });
+}
+
+// Инициализация
+window.addEventListener('load', () => {
+  checkFadeIn();
+  checkCounters();
+});
+
+window.addEventListener('scroll', () => {
+  checkFadeIn();
+  checkCounters();
+});
+
+// Запуск анимации при загрузке
+setTimeout(() => {
+  checkFadeIn();
+  checkCounters();
+}, 100);
+</script>
+
+</body>
+</html>
